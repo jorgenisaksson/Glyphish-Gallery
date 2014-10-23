@@ -34,9 +34,11 @@
         
     NSString *selectedBase = [[selectedFolder stringByAppendingPathComponent:[base lastPathComponent]] stringByDeletingPathExtension];
     NSString *baseRetina = [[NSString stringWithFormat:@"%@@2x", base] stringByAppendingPathExtension:[aBasePath pathExtension]];
+    NSString *baseRetinaHD = [[NSString stringWithFormat:@"%@@3x", base] stringByAppendingPathExtension:[aBasePath pathExtension]];
     
     NSString *selectedPath = [[NSString stringWithFormat:@"%@-selected", selectedBase] stringByAppendingPathExtension:[aBasePath pathExtension]];
     NSString *selectedRetinaPath = [[NSString stringWithFormat:@"%@-selected@2x", selectedBase] stringByAppendingPathExtension:[aBasePath pathExtension]];
+    NSString *selectedRetinaHDPath = [[NSString stringWithFormat:@"%@-selected@3x", selectedBase] stringByAppendingPathExtension:[aBasePath pathExtension]];
     
     [self.variants removeAllObjects];
     
@@ -54,6 +56,12 @@
         [self.variants addObject:anIcon];
     }
 
+    if ([[NSFileManager defaultManager] fileExistsAtPath:baseRetinaHD]) {
+        anIcon = [[Icon alloc] init];
+        anIcon.filePath = baseRetinaHD;
+        [self.variants addObject:anIcon];
+    }
+
     if ([[NSFileManager defaultManager] fileExistsAtPath:selectedPath]) {
         anIcon = [[Icon alloc] init];
         anIcon.filePath = selectedPath;
@@ -63,6 +71,12 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:selectedRetinaPath]) {
         anIcon = [[Icon alloc] init];
         anIcon.filePath = selectedRetinaPath;
+        [self.variants addObject:anIcon];
+    }
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:selectedRetinaHDPath]) {
+        anIcon = [[Icon alloc] init];
+        anIcon.filePath = selectedRetinaHDPath;
         [self.variants addObject:anIcon];
     }
 }

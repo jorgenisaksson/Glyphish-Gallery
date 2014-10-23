@@ -134,7 +134,7 @@
             // Add full path for non directories
             if ([isDirectory boolValue] == NO && [fileName.pathExtension isEqualToString:@"png"]) {
               //  NSString *filename = [theURL.path.lastPathComponent stringByDeletingPathExtension];
-                if (![[fileName stringByDeletingPathExtension] hasSuffix:@"@2x"]) {
+                if ( !( ([[fileName stringByDeletingPathExtension] hasSuffix:@"@2x"]) || ([[fileName stringByDeletingPathExtension] hasSuffix:@"@3x"]) )){
                     Icon *anIcon = [[Icon alloc] init];
                     anIcon.basePath = theURL.path;
                     [theArray addObject:anIcon];
